@@ -17,4 +17,15 @@
     - [x] 驗證資料正確性 <!-- id: 9 -->
     - [x] 生成最終靜態網頁 <!-- id: 10 -->
     - [x] 撰寫成果報告 (Walkthrough) <!-- id: 11 -->
-    - [x] 移除領獎注意事項區塊 <!-- id: 12 -->
+- [x] 2026 自動化優化階段
+    - [x] 更新軟體需求規格書 (SRS) - 加入法規與自動化需求 <!-- id: 13 -->
+    - [x] 制定實作計畫 - 加入 GitHub Actions 流程 <!-- id: 14 -->
+    - [x] 核心功能升級 <!-- id: 15 -->
+        - [x] 優化 scraper.py：動態年份處理與獎項正規化
+        - [x] 優化 generator.py：加入獎項描述與獎金資訊
+    - [x] 自動化環境建置 <!-- id: 16 -->
+        - [x] 設定 GitHub Actions Workflow (.github/workflows/update_invoices.yml)
+        - [x] 測試定時觸發與手動觸發功能
+    - [x] 最終驗證 <!-- id: 17 -->
+        - [x] 驗證自動化更新後的網頁呈現
+        - [x] 更新 Walkthrough 文件 (包含驗證方法)

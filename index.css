@@ -104,26 +104,45 @@ p.subtitle {
 }
 
 .prize-row {
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem;
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 1.5rem;
 }
 
 .prize-row:last-child {
     margin-bottom: 0;
 }
 
+.prize-info-col {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
 .prize-name {
+    font-weight: 900;
+    font-size: 1.25rem;
+    color: var(--text-primary);
+    letter-spacing: 0.02em;
+}
+
+.prize-amount {
+    color: var(--accent-red);
     font-weight: 700;
-    font-size: 1.1rem;
-    color: var(--text-secondary);
-    margin-bottom: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+    font-size: 0.95rem;
 }
 
 .number-list {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     gap: 1rem;
+}
+
+.win-number-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
 }
 
 .win-number {
@@ -135,12 +154,36 @@ p.subtitle {
     padding: 0.5rem 1.25rem;
     border-radius: 0.75rem;
     border: 1px solid #fee2e2;
+    display: inline-block;
+}
+
+.prize-desc {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.4;
+    margin-top: 0.5rem;
 }
 
 .special .win-number {
     background: #fff7ed;
     color: #f97316;
     border-color: #ffedd5;
+}
+
+.special .prize-amount {
+    color: #f97316;
+}
+
+.official-link {
+    color: #6366f1;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: opacity 0.2s;
+}
+
+.official-link:hover {
+    opacity: 0.8;
 }
 
 footer {
@@ -151,7 +194,15 @@ footer {
 }
 
 @media (max-width: 640px) {
-    h1 { font-size: 2rem; }
-    .winning-card { padding: 1.5rem; }
-    .win-number { font-size: 1.5rem; }
+    h1 {
+        font-size: 2rem;
+    }
+
+    .winning-card {
+        padding: 1.5rem;
+    }
+
+    .win-number {
+        font-size: 1.5rem;
+    }
 }

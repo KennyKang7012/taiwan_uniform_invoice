@@ -29,10 +29,19 @@ def get_winning_numbers(detail_url):
             title = th.get_text(strip=True)
             if title in ["序號", "年月份", "獎別", "領獎注意事項"]:
                 continue
+            
+            # 標準化獎項名稱
+            if "特別獎" in title: title = "特別獎"
+            elif "特獎" in title: title = "特獎"
+            elif "頭獎" in title: title = "頭獎"
+            elif "二獎" in title: title = "二獎"
+            elif "三獎" in title: title = "三獎"
+            elif "四獎" in title: title = "四獎"
+            elif "五獎" in title: title = "五獎"
+            elif "六獎" in title: title = "六獎"
+            elif "增開六獎" in title: title = "增開六獎"
 
             # 抓取包含號碼的文字
-            # 我們尋找 td 內所有內容，並提取看起來像中獎號碼的字串 (通常是 8 位數字)
-            # 有些期別可能有多組號碼
             import re
             text_content = td.get_text(" ", strip=True)
             # 尋找所有 8 位數字，或者至少 3 位數字 (領獎金額說明外的數字)
@@ -65,8 +74,14 @@ def main():
     all_data = []
     seen_periods = set()
     
+    # 動態計算年份 (民國年)
+    from datetime import datetime
+    current_year = datetime.now().year - 1911
+    recent_years = [str(current_year), str(current_year - 1)]
+    print(f"  目標年份: {recent_years}")
+    
     # 爬取前幾頁以涵蓋兩年
-    for page in range(1, 5):
+    for page in range(1, 6):
         print(f"正在爬取列表第 {page} 頁...")
         url = f"{LIST_URL}?page={page}" if page > 1 else LIST_URL
         
@@ -93,7 +108,7 @@ def main():
                 except ValueError:
                     continue
                     
-                # 規則：只擷取序號為偶數的內容
+                # 規則：只擷取序號為偶數的內容 (一般中獎號碼)
                 if seq % 2 == 0:
                     a_tag = td_content.find('a')
                     if not a_tag:
@@ -103,10 +118,11 @@ def main():
                     if period_title in seen_periods:
                         continue
                         
-                    # 限制兩年 (114, 113, 112年11-12月等)
-                    # 包含 "114", "113", 或 "112年 11 ~ 12"
-                    is_recent = any(y in period_title for y in ["114", "113"]) or "112年 11" in period_title
+                    # 檢查是否為近兩年內
+                    is_recent = any(y in period_title for y in recent_years)
                     if not is_recent:
+                        # 額外檢查跨年期別 (如 113年 12 ~ 114年 01)
+                        # 但通常清冊會標註 114年 01-02月，所以 is_recent 應該夠
                         continue
 
                     href = a_tag['href'].replace('/etwmain/../', '/')
@@ -131,6 +147,17 @@ def main():
                     
         except Exception as e:
             print(f"爬取錯誤: {e}")
+
+    # 排序：年份與月份降序 (最新在前)
+    # period 格式通常為 "114年09-10月"
+    def sort_key(item):
+        import re
+        match = re.search(r'(\d+)年\s*(\d+)', item['period'])
+        if match:
+            return int(match.group(1)) * 100 + int(match.group(2))
+        return 0
+    
+    all_data.sort(key=sort_key, reverse=True)
 
     # 儲存資料
     print(f"正在將 {len(all_data)} 筆期別資料寫入 data.json...")

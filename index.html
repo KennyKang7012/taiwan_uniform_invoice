@@ -115,26 +115,45 @@ p.subtitle {
 }
 
 .prize-row {
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem;
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 1.5rem;
 }
 
 .prize-row:last-child {
     margin-bottom: 0;
 }
 
+.prize-info-col {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
 .prize-name {
+    font-weight: 900;
+    font-size: 1.25rem;
+    color: var(--text-primary);
+    letter-spacing: 0.02em;
+}
+
+.prize-amount {
+    color: var(--accent-red);
     font-weight: 700;
-    font-size: 1.1rem;
-    color: var(--text-secondary);
-    margin-bottom: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+    font-size: 0.95rem;
 }
 
 .number-list {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     gap: 1rem;
+}
+
+.win-number-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
 }
 
 .win-number {
@@ -146,12 +165,36 @@ p.subtitle {
     padding: 0.5rem 1.25rem;
     border-radius: 0.75rem;
     border: 1px solid #fee2e2;
+    display: inline-block;
+}
+
+.prize-desc {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.4;
+    margin-top: 0.5rem;
 }
 
 .special .win-number {
     background: #fff7ed;
     color: #f97316;
     border-color: #ffedd5;
+}
+
+.special .prize-amount {
+    color: #f97316;
+}
+
+.official-link {
+    color: #6366f1;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: opacity 0.2s;
+}
+
+.official-link:hover {
+    opacity: 0.8;
 }
 
 footer {
@@ -162,18 +205,25 @@ footer {
 }
 
 @media (max-width: 640px) {
-    h1 { font-size: 2rem; }
-    .winning-card { padding: 1.5rem; }
-    .win-number { font-size: 1.5rem; }
-}
+    h1 {
+        font-size: 2rem;
+    }
 
+    .winning-card {
+        padding: 1.5rem;
+    }
+
+    .win-number {
+        font-size: 1.5rem;
+    }
+}
     </style>
 </head>
 <body>
     <div class="container">
         <header>
             <h1>統一發票中獎號碼</h1>
-            <p class="subtitle">自動爬取財政部最新開獎資訊 (最近兩年)</p>
+            <p class="subtitle">自動爬取財政部最新開獎資訊 (依據法規精準顯示)</p>
         </header>
 
         <div class="period-selector" id="periodSelector">
@@ -198,34 +248,6 @@ footer {
                 114年 01 ~ 02 月
             </button>
             
-            <button class="period-btn " onclick="showPeriod('5')">
-                113年 11 ~ 12 月
-            </button>
-            
-            <button class="period-btn " onclick="showPeriod('6')">
-                113年 09 ~ 10 月
-            </button>
-            
-            <button class="period-btn " onclick="showPeriod('7')">
-                113年 07 ~ 08 月
-            </button>
-            
-            <button class="period-btn " onclick="showPeriod('8')">
-                113年 05 ~ 06 月
-            </button>
-            
-            <button class="period-btn " onclick="showPeriod('9')">
-                113年 03 ~ 04 月
-            </button>
-            
-            <button class="period-btn " onclick="showPeriod('10')">
-                113年 01 ~ 02 月
-            </button>
-            
-            <button class="period-btn " onclick="showPeriod('11')">
-                112年 11 ~ 12 月
-            </button>
-            
         </div>
 
         <div id="winningContent">
@@ -233,39 +255,57 @@ footer {
             <div class="winning-card " id="period-0">
                 <div class="period-header">
                     <h2>114年 09 ~ 10 月</h2>
-                    <a href="https://www.etax.nat.gov.tw/etw-main/ETW183W2_11409" target="_blank" style="color: #6366f1; text-decoration: none; font-size: 0.9rem;">查看官網原文 →</a>
+                    <a href="https://www.etax.nat.gov.tw/etw-main/ETW183W2_11409" target="_blank" class="official-link">查看官網原文 →</a>
                 </div>
                 
                 <div class="prizes">
                     
                     <div class="prize-row special">
-                        <div class="prize-name">特別獎</div>
+                        <div class="prize-info-col">
+                            <div class="prize-name">特別獎</div>
+                            <div class="prize-amount">1,000 萬元</div>
+                        </div>
                         <div class="number-list">
-                            
-                            <div class="win-number">25834483</div>
-                            
+                            <div class="win-number-wrap">
+                                
+                                <div class="win-number">25834483</div>
+                                
+                            </div>
+                            <div class="prize-desc">同期統一發票收執聯 8 位數號碼與中獎號碼完全相同者</div>
                         </div>
                     </div>
                     
                     <div class="prize-row special">
-                        <div class="prize-name">特獎</div>
+                        <div class="prize-info-col">
+                            <div class="prize-name">特獎</div>
+                            <div class="prize-amount">200 萬元</div>
+                        </div>
                         <div class="number-list">
-                            
-                            <div class="win-number">46587380</div>
-                            
+                            <div class="win-number-wrap">
+                                
+                                <div class="win-number">46587380</div>
+                                
+                            </div>
+                            <div class="prize-desc">同期統一發票收執聯 8 位數號碼與中獎號碼完全相同者</div>
                         </div>
                     </div>
                     
                     <div class="prize-row ">
-                        <div class="prize-name">頭獎</div>
+                        <div class="prize-info-col">
+                            <div class="prize-name">頭獎</div>
+                            <div class="prize-amount">20 萬元</div>
+                        </div>
                         <div class="number-list">
-                            
-                            <div class="win-number">41016094</div>
-                            
-                            <div class="win-number">98081574</div>
-                            
-                            <div class="win-number">07309261</div>
-                            
+                            <div class="win-number-wrap">
+                                
+                                <div class="win-number">41016094</div>
+                                
+                                <div class="win-number">98081574</div>
+                                
+                                <div class="win-number">07309261</div>
+                                
+                            </div>
+                            <div class="prize-desc">同期統一發票收執聯 8 位數號碼與中獎號碼完全相同者</div>
                         </div>
                     </div>
                     
@@ -275,39 +315,57 @@ footer {
             <div class="winning-card hidden" id="period-1">
                 <div class="period-header">
                     <h2>114年 07 ~ 08 月</h2>
-                    <a href="https://www.etax.nat.gov.tw/etw-main/ETW183W2_11407" target="_blank" style="color: #6366f1; text-decoration: none; font-size: 0.9rem;">查看官網原文 →</a>
+                    <a href="https://www.etax.nat.gov.tw/etw-main/ETW183W2_11407" target="_blank" class="official-link">查看官網原文 →</a>
                 </div>
                 
                 <div class="prizes">
                     
                     <div class="prize-row special">
-                        <div class="prize-name">特別獎</div>
+                        <div class="prize-info-col">
+                            <div class="prize-name">特別獎</div>
+                            <div class="prize-amount">1,000 萬元</div>
+                        </div>
                         <div class="number-list">
-                            
-                            <div class="win-number">53960536</div>
-                            
+                            <div class="win-number-wrap">
+                                
+                                <div class="win-number">53960536</div>
+                                
+                            </div>
+                            <div class="prize-desc">同期統一發票收執聯 8 位數號碼與中獎號碼完全相同者</div>
                         </div>
                     </div>
                     
                     <div class="prize-row special">
-                        <div class="prize-name">特獎</div>
+                        <div class="prize-info-col">
+                            <div class="prize-name">特獎</div>
+                            <div class="prize-amount">200 萬元</div>
+                        </div>
                         <div class="number-list">
-                            
-                            <div class="win-number">51509866</div>
-                            
+                            <div class="win-number-wrap">
+                                
+                                <div class="win-number">51509866</div>
+                                
+                            </div>
+                            <div class="prize-desc">同期統一發票收執聯 8 位數號碼與中獎號碼完全相同者</div>
                         </div>
                     </div>
                     
                     <div class="prize-row ">
-                        <div class="prize-name">頭獎</div>
+                        <div class="prize-info-col">
+                            <div class="prize-name">頭獎</div>
+                            <div class="prize-amount">20 萬元</div>
+                        </div>
                         <div class="number-list">
-                            
-                            <div class="win-number">43074088</div>
-                            
-                            <div class="win-number">22870220</div>
-                            
-                            <div class="win-number">38253117</div>
-                            
+                            <div class="win-number-wrap">
+                                
+                                <div class="win-number">43074088</div>
+                                
+                                <div class="win-number">22870220</div>
+                                
+                                <div class="win-number">38253117</div>
+                                
+                            </div>
+                            <div class="prize-desc">同期統一發票收執聯 8 位數號碼與中獎號碼完全相同者</div>
                         </div>
                     </div>
                     
@@ -317,39 +375,57 @@ footer {
             <div class="winning-card hidden" id="period-2">
                 <div class="period-header">
                     <h2>114年 05 ~ 06 月</h2>
-                    <a href="https://www.etax.nat.gov.tw/etw-main/ETW183W2_11405" target="_blank" style="color: #6366f1; text-decoration: none; font-size: 0.9rem;">查看官網原文 →</a>
+                    <a href="https://www.etax.nat.gov.tw/etw-main/ETW183W2_11405" target="_blank" class="official-link">查看官網原文 →</a>
                 </div>
                 
                 <div class="prizes">
                     
                     <div class="prize-row special">
-                        <div class="prize-name">特別獎</div>
+                        <div class="prize-info-col">
+                            <div class="prize-name">特別獎</div>
+                            <div class="prize-amount">1,000 萬元</div>
+                        </div>
                         <div class="number-list">
-                            
-                            <div class="win-number">47406327</div>
-                            
+                            <div class="win-number-wrap">
+                                
+                                <div class="win-number">47406327</div>
+                                
+                            </div>
+                            <div class="prize-desc">同期統一發票收執聯 8 位數號碼與中獎號碼完全相同者</div>
                         </div>
                     </div>
                     
                     <div class="prize-row special">
-                        <div class="prize-name">特獎</div>
+                        <div class="prize-info-col">
+                            <div class="prize-name">特獎</div>
+                            <div class="prize-amount">200 萬元</div>
+                        </div>
                         <div class="number-list">
-                            
-                            <div class="win-number">05579058</div>
-                            
+                            <div class="win-number-wrap">
+                                
+                                <div class="win-number">05579058</div>
+                                
+                            </div>
+                            <div class="prize-desc">同期統一發票收執聯 8 位數號碼與中獎號碼完全相同者</div>
                         </div>
                     </div>
                     
                     <div class="prize-row ">
-                        <div class="prize-name">頭獎</div>
+                        <div class="prize-info-col">
+                            <div class="prize-name">頭獎</div>
+                            <div class="prize-amount">20 萬元</div>
+                        </div>
                         <div class="number-list">
-                            
-                            <div class="win-number">49912232</div>
-                            
-                            <div class="win-number">73145004</div>
-                            
-                            <div class="win-number">99174704</div>
-                            
+                            <div class="win-number-wrap">
+                                
+                                <div class="win-number">49912232</div>
+                                
+                                <div class="win-number">73145004</div>
+                                
+                                <div class="win-number">99174704</div>
+                                
+                            </div>
+                            <div class="prize-desc">同期統一發票收執聯 8 位數號碼與中獎號碼完全相同者</div>
                         </div>
                     </div>
                     
@@ -359,39 +435,57 @@ footer {
             <div class="winning-card hidden" id="period-3">
                 <div class="period-header">
                     <h2>114年 03 ~ 04 月</h2>
-                    <a href="https://www.etax.nat.gov.tw/etw-main/ETW183W2_11403" target="_blank" style="color: #6366f1; text-decoration: none; font-size: 0.9rem;">查看官網原文 →</a>
+                    <a href="https://www.etax.nat.gov.tw/etw-main/ETW183W2_11403" target="_blank" class="official-link">查看官網原文 →</a>
                 </div>
                 
                 <div class="prizes">
                     
                     <div class="prize-row special">
-                        <div class="prize-name">特別獎</div>
+                        <div class="prize-info-col">
+                            <div class="prize-name">特別獎</div>
+                            <div class="prize-amount">1,000 萬元</div>
+                        </div>
                         <div class="number-list">
-                            
-                            <div class="win-number">64557267</div>
-                            
+                            <div class="win-number-wrap">
+                                
+                                <div class="win-number">64557267</div>
+                                
+                            </div>
+                            <div class="prize-desc">同期統一發票收執聯 8 位數號碼與中獎號碼完全相同者</div>
                         </div>
                     </div>
                     
                     <div class="prize-row special">
-                        <div class="prize-name">特獎</div>
+                        <div class="prize-info-col">
+                            <div class="prize-name">特獎</div>
+                            <div class="prize-amount">200 萬元</div>
+                        </div>
                         <div class="number-list">
-                            
-                            <div class="win-number">64808075</div>
-                            
+                            <div class="win-number-wrap">
+                                
+                                <div class="win-number">64808075</div>
+                                
+                            </div>
+                            <div class="prize-desc">同期統一發票收執聯 8 位數號碼與中獎號碼完全相同者</div>
                         </div>
                     </div>
                     
                     <div class="prize-row ">
-                        <div class="prize-name">頭獎</div>
+                        <div class="prize-info-col">
+                            <div class="prize-name">頭獎</div>
+                            <div class="prize-amount">20 萬元</div>
+                        </div>
                         <div class="number-list">
-                            
-                            <div class="win-number">04322277</div>
-                            
-                            <div class="win-number">07903676</div>
-                            
-                            <div class="win-number">98883497</div>
-                            
+                            <div class="win-number-wrap">
+                                
+                                <div class="win-number">04322277</div>
+                                
+                                <div class="win-number">07903676</div>
+                                
+                                <div class="win-number">98883497</div>
+                                
+                            </div>
+                            <div class="prize-desc">同期統一發票收執聯 8 位數號碼與中獎號碼完全相同者</div>
                         </div>
                     </div>
                     
@@ -401,333 +495,57 @@ footer {
             <div class="winning-card hidden" id="period-4">
                 <div class="period-header">
                     <h2>114年 01 ~ 02 月</h2>
-                    <a href="https://www.etax.nat.gov.tw/etw-main/ETW183W2_11401" target="_blank" style="color: #6366f1; text-decoration: none; font-size: 0.9rem;">查看官網原文 →</a>
+                    <a href="https://www.etax.nat.gov.tw/etw-main/ETW183W2_11401" target="_blank" class="official-link">查看官網原文 →</a>
                 </div>
                 
                 <div class="prizes">
                     
                     <div class="prize-row special">
-                        <div class="prize-name">特別獎</div>
+                        <div class="prize-info-col">
+                            <div class="prize-name">特別獎</div>
+                            <div class="prize-amount">1,000 萬元</div>
+                        </div>
                         <div class="number-list">
-                            
-                            <div class="win-number">95980685</div>
-                            
+                            <div class="win-number-wrap">
+                                
+                                <div class="win-number">95980685</div>
+                                
+                            </div>
+                            <div class="prize-desc">同期統一發票收執聯 8 位數號碼與中獎號碼完全相同者</div>
                         </div>
                     </div>
                     
                     <div class="prize-row special">
-                        <div class="prize-name">特獎</div>
+                        <div class="prize-info-col">
+                            <div class="prize-name">特獎</div>
+                            <div class="prize-amount">200 萬元</div>
+                        </div>
                         <div class="number-list">
-                            
-                            <div class="win-number">37166026</div>
-                            
+                            <div class="win-number-wrap">
+                                
+                                <div class="win-number">37166026</div>
+                                
+                            </div>
+                            <div class="prize-desc">同期統一發票收執聯 8 位數號碼與中獎號碼完全相同者</div>
                         </div>
                     </div>
                     
                     <div class="prize-row ">
-                        <div class="prize-name">頭獎</div>
-                        <div class="number-list">
-                            
-                            <div class="win-number">78394633</div>
-                            
-                            <div class="win-number">26503878</div>
-                            
-                            <div class="win-number">39200954</div>
-                            
+                        <div class="prize-info-col">
+                            <div class="prize-name">頭獎</div>
+                            <div class="prize-amount">20 萬元</div>
                         </div>
-                    </div>
-                    
-                </div>
-            </div>
-            
-            <div class="winning-card hidden" id="period-5">
-                <div class="period-header">
-                    <h2>113年 11 ~ 12 月</h2>
-                    <a href="https://www.etax.nat.gov.tw/etw-main/ETW183W2_11311" target="_blank" style="color: #6366f1; text-decoration: none; font-size: 0.9rem;">查看官網原文 →</a>
-                </div>
-                
-                <div class="prizes">
-                    
-                    <div class="prize-row special">
-                        <div class="prize-name">特別獎</div>
                         <div class="number-list">
-                            
-                            <div class="win-number">13965913</div>
-                            
-                        </div>
-                    </div>
-                    
-                    <div class="prize-row special">
-                        <div class="prize-name">特獎</div>
-                        <div class="number-list">
-                            
-                            <div class="win-number">29892710</div>
-                            
-                        </div>
-                    </div>
-                    
-                    <div class="prize-row ">
-                        <div class="prize-name">頭獎</div>
-                        <div class="number-list">
-                            
-                            <div class="win-number">26649927</div>
-                            
-                            <div class="win-number">59565539</div>
-                            
-                            <div class="win-number">11460822</div>
-                            
-                        </div>
-                    </div>
-                    
-                </div>
-            </div>
-            
-            <div class="winning-card hidden" id="period-6">
-                <div class="period-header">
-                    <h2>113年 09 ~ 10 月</h2>
-                    <a href="https://www.etax.nat.gov.tw/etw-main/ETW183W2_11309" target="_blank" style="color: #6366f1; text-decoration: none; font-size: 0.9rem;">查看官網原文 →</a>
-                </div>
-                
-                <div class="prizes">
-                    
-                    <div class="prize-row special">
-                        <div class="prize-name">特別獎</div>
-                        <div class="number-list">
-                            
-                            <div class="win-number">28630525</div>
-                            
-                        </div>
-                    </div>
-                    
-                    <div class="prize-row special">
-                        <div class="prize-name">特獎</div>
-                        <div class="number-list">
-                            
-                            <div class="win-number">90028580</div>
-                            
-                        </div>
-                    </div>
-                    
-                    <div class="prize-row ">
-                        <div class="prize-name">頭獎</div>
-                        <div class="number-list">
-                            
-                            <div class="win-number">27435934</div>
-                            
-                            <div class="win-number">39666605</div>
-                            
-                            <div class="win-number">02550031</div>
-                            
-                        </div>
-                    </div>
-                    
-                </div>
-            </div>
-            
-            <div class="winning-card hidden" id="period-7">
-                <div class="period-header">
-                    <h2>113年 07 ~ 08 月</h2>
-                    <a href="https://www.etax.nat.gov.tw/etw-main/ETW183W2_11307" target="_blank" style="color: #6366f1; text-decoration: none; font-size: 0.9rem;">查看官網原文 →</a>
-                </div>
-                
-                <div class="prizes">
-                    
-                    <div class="prize-row special">
-                        <div class="prize-name">特別獎</div>
-                        <div class="number-list">
-                            
-                            <div class="win-number">38039158</div>
-                            
-                        </div>
-                    </div>
-                    
-                    <div class="prize-row special">
-                        <div class="prize-name">特獎</div>
-                        <div class="number-list">
-                            
-                            <div class="win-number">08276859</div>
-                            
-                        </div>
-                    </div>
-                    
-                    <div class="prize-row ">
-                        <div class="prize-name">頭獎</div>
-                        <div class="number-list">
-                            
-                            <div class="win-number">32110911</div>
-                            
-                            <div class="win-number">84289408</div>
-                            
-                            <div class="win-number">13446901</div>
-                            
-                        </div>
-                    </div>
-                    
-                </div>
-            </div>
-            
-            <div class="winning-card hidden" id="period-8">
-                <div class="period-header">
-                    <h2>113年 05 ~ 06 月</h2>
-                    <a href="https://www.etax.nat.gov.tw/etw-main/ETW183W2_11305" target="_blank" style="color: #6366f1; text-decoration: none; font-size: 0.9rem;">查看官網原文 →</a>
-                </div>
-                
-                <div class="prizes">
-                    
-                    <div class="prize-row special">
-                        <div class="prize-name">特別獎</div>
-                        <div class="number-list">
-                            
-                            <div class="win-number">86396830</div>
-                            
-                        </div>
-                    </div>
-                    
-                    <div class="prize-row special">
-                        <div class="prize-name">特獎</div>
-                        <div class="number-list">
-                            
-                            <div class="win-number">53267964</div>
-                            
-                        </div>
-                    </div>
-                    
-                    <div class="prize-row ">
-                        <div class="prize-name">頭獎</div>
-                        <div class="number-list">
-                            
-                            <div class="win-number">39635796</div>
-                            
-                            <div class="win-number">98978859</div>
-                            
-                            <div class="win-number">55566054</div>
-                            
-                        </div>
-                    </div>
-                    
-                </div>
-            </div>
-            
-            <div class="winning-card hidden" id="period-9">
-                <div class="period-header">
-                    <h2>113年 03 ~ 04 月</h2>
-                    <a href="https://www.etax.nat.gov.tw/etw-main/ETW183W2_11303" target="_blank" style="color: #6366f1; text-decoration: none; font-size: 0.9rem;">查看官網原文 →</a>
-                </div>
-                
-                <div class="prizes">
-                    
-                    <div class="prize-row special">
-                        <div class="prize-name">特別獎</div>
-                        <div class="number-list">
-                            
-                            <div class="win-number">44140251</div>
-                            
-                        </div>
-                    </div>
-                    
-                    <div class="prize-row special">
-                        <div class="prize-name">特獎</div>
-                        <div class="number-list">
-                            
-                            <div class="win-number">14715309</div>
-                            
-                        </div>
-                    </div>
-                    
-                    <div class="prize-row ">
-                        <div class="prize-name">頭獎</div>
-                        <div class="number-list">
-                            
-                            <div class="win-number">86562747</div>
-                            
-                            <div class="win-number">79171152</div>
-                            
-                            <div class="win-number">77925523</div>
-                            
-                        </div>
-                    </div>
-                    
-                </div>
-            </div>
-            
-            <div class="winning-card hidden" id="period-10">
-                <div class="period-header">
-                    <h2>113年 01 ~ 02 月</h2>
-                    <a href="https://www.etax.nat.gov.tw/etw-main/ETW183W2_11301" target="_blank" style="color: #6366f1; text-decoration: none; font-size: 0.9rem;">查看官網原文 →</a>
-                </div>
-                
-                <div class="prizes">
-                    
-                    <div class="prize-row special">
-                        <div class="prize-name">特別獎</div>
-                        <div class="number-list">
-                            
-                            <div class="win-number">16620962</div>
-                            
-                        </div>
-                    </div>
-                    
-                    <div class="prize-row special">
-                        <div class="prize-name">特獎</div>
-                        <div class="number-list">
-                            
-                            <div class="win-number">50008017</div>
-                            
-                        </div>
-                    </div>
-                    
-                    <div class="prize-row ">
-                        <div class="prize-name">頭獎</div>
-                        <div class="number-list">
-                            
-                            <div class="win-number">73705743</div>
-                            
-                            <div class="win-number">90315047</div>
-                            
-                            <div class="win-number">10604429</div>
-                            
-                        </div>
-                    </div>
-                    
-                </div>
-            </div>
-            
-            <div class="winning-card hidden" id="period-11">
-                <div class="period-header">
-                    <h2>112年 11 ~ 12 月</h2>
-                    <a href="https://www.etax.nat.gov.tw/etw-main/ETW183W2_11211" target="_blank" style="color: #6366f1; text-decoration: none; font-size: 0.9rem;">查看官網原文 →</a>
-                </div>
-                
-                <div class="prizes">
-                    
-                    <div class="prize-row special">
-                        <div class="prize-name">特別獎</div>
-                        <div class="number-list">
-                            
-                            <div class="win-number">63603594</div>
-                            
-                        </div>
-                    </div>
-                    
-                    <div class="prize-row special">
-                        <div class="prize-name">特獎</div>
-                        <div class="number-list">
-                            
-                            <div class="win-number">73155944</div>
-                            
-                        </div>
-                    </div>
-                    
-                    <div class="prize-row ">
-                        <div class="prize-name">頭獎</div>
-                        <div class="number-list">
-                            
-                            <div class="win-number">94985899</div>
-                            
-                            <div class="win-number">57283420</div>
-                            
-                            <div class="win-number">62825278</div>
-                            
+                            <div class="win-number-wrap">
+                                
+                                <div class="win-number">78394633</div>
+                                
+                                <div class="win-number">26503878</div>
+                                
+                                <div class="win-number">39200954</div>
+                                
+                            </div>
+                            <div class="prize-desc">同期統一發票收執聯 8 位數號碼與中獎號碼完全相同者</div>
                         </div>
                     </div>
                     
@@ -737,27 +555,24 @@ footer {
         </div>
 
         <footer>
-            <p>© 2026 統一發票中獎號碼查詢系統 | 資料來源：財政部稅務入口網</p>
+            <p>© 2026 統一發票中獎號碼自動更新系統 | 資料來源：財政部稅務入口網</p>
+            <p style="font-size: 0.8rem; opacity: 0.7; margin-top: 5px;">最後更新：2026-01-11 13:56:05</p>
         </footer>
     </div>
 
     <script>
         function showPeriod(index) {
-            // 切換按鈕狀態
             const btns = document.querySelectorAll('.period-btn');
             btns.forEach((btn, i) => {
                 if (i == index) btn.classList.add('active');
                 else btn.classList.remove('active');
             });
 
-            // 切換內容顯示
             const cards = document.querySelectorAll('.winning-card');
             cards.forEach((card, i) => {
                 if (i == index) card.classList.remove('hidden');
                 else card.classList.add('hidden');
             });
-            
-            // 平滑滾動至頂部
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
     </script>

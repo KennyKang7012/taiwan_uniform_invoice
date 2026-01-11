@@ -11,13 +11,15 @@
 ## 擬議變動
 
 ### [爬蟲與資料結構]
-實作 Python 爬蟲邏輯。
+實作 Python 爬蟲邏輯與號碼驗證邏輯。
 
 #### [NEW] `scraper.py`(file:///Users/kennykang/Desktop/VibeProj/Anti/taiwan_uniform_invoice/scraper.py)
 - 使用 `requests` 與 `BeautifulSoup4` 爬取列表頁。
 - 實作分頁爬取（預計爬取前 2 頁即可涵蓋兩年數據）。
 - 爬取詳細頁中所有 `.etw-color-red` 標籤的文字。
 - 將結果儲存為 `data.json`。
+- **[優化]**：自動偵測當前年份，移除寫死的 113/114 年邏輯。
+- **[規則]**：依照法規第 3 條更新獎項分類邏輯（特別獎、特獎、頭獎等）。
 
 ### [網頁生成與模板]
 實作靜態網頁生成邏輯。
@@ -33,6 +35,13 @@
 ### [環境配置]
 #### [NEW] `pyproject.toml`(file:///Users/kennykang/Desktop/VibeProj/Anti/taiwan_uniform_invoice/pyproject.toml)
 - 使用 `uv init` 生成。
+
+### [自動化工作流]
+針對 GitHub Actions 實作自動化。
+
+#### [NEW] `.github/workflows/update_invoices.yml`(file:///Users/kennykang/Desktop/VibeProj/Anti/taiwan_uniform_invoice/.github/workflows/update_invoices.yml)
+- 設定 `cron`：`0 8 25,26,27 1,3,5,7,9,11 *` (單月 25-27 日，台灣時間約下午 4 點)。
+- 步驟：Sync 依賴 -> 執行 Scraper -> 執行 Generator -> Commit & Push。
 
 ---
 
