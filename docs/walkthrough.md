@@ -37,6 +37,19 @@
 *   **解決方案**：在 `scraper.py` 中引入 `datetime` 自動計算當前民國年份及其前一年。
 *   **自動化配置**：設定 GitHub Actions Cron Job，確保在開獎期間每 8 小時檢查一次更新（25-27 日）。
 
+### 5. GitHub Actions 疑難排解 (重要紀錄)
+在整合自動化流程時，我們遇到了兩個典型的故障情況：
+
+*   **故障 A：權限不足 (Permission Denied)**
+    *   **現象**：Git Push 報錯 `error 403`。
+    *   **原因**：GitHub Actions 預設的 `GITHUB_TOKEN` 只有讀取權限，無法將更新後的 `data.json` 推送回倉庫。
+    *   **解法**：在 `.yml` 腳本中明確加入 `permissions: contents: write` 配置。
+
+*   **故障 B：推送衝突 (Non-fast-forward / Rejected)**
+    *   **現象**：當 Action 執行中，若本地剛好也推送到 GitHub，會導致 Action 的 Git Push 被拒絕。
+    *   **原因**：典型的爭搶資源 (Race Condition)，伺服器版本已更新，導致 Action 版本變舊。
+    *   **解法**：在 Push 前加入 `git pull --rebase origin main`，讓 Action 自動將變更「墊疊」在最新 Commit 之後，完美解決衝突。
+
 ### 1. 網頁編碼亂碼問題 (Encoding Issue)
 *   **困難點**：財政部官網在部分請求下返回的編碼偵測不穩定，導致抓取到的繁體中文字元出現亂碼（如 `114å¹´`）。
 *   **解決方案**：
