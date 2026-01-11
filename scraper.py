@@ -27,7 +27,7 @@ def get_winning_numbers(detail_url):
                 continue
                 
             title = th.get_text(strip=True)
-            if title in ["序號", "年月份", "獎別"]:
+            if title in ["序號", "年月份", "獎別", "領獎注意事項"]:
                 continue
 
             # 抓取包含號碼的文字
