@@ -7,6 +7,9 @@ on:
     - cron: '0 8 25,26,27 1,3,5,7,9,11 *'
   workflow_dispatch: # 允許手動觸發
 
+permissions:
+  contents: write # 允許 Actions 機器人推送變更回倉庫
+
 jobs:
   update:
     runs-on: ubuntu-latest
