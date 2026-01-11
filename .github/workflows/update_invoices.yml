@@ -37,4 +37,5 @@ jobs:
           git config --local user.name "github-actions[bot]"
           git add data.json index.html
           git commit -m "auto: update invoice numbers [$(date +'%Y-%m-%d %H:%M')]" || exit 0
+          git pull --rebase origin main
           git push
